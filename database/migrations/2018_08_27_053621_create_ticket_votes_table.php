@@ -14,13 +14,15 @@ class CreateTicketVotesTable extends Migration {
 	{
 		Schema::create('ticket_votes', function(Blueprint $table)
 		{
+            $table->engine = 'InnoDB';
+
 			$table->increments('id');
 
 			$table->unsignedInteger('user_id');
-			$table->foreign('user_id')->references('id')->on('users');
+			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
 			$table->unsignedInteger('ticket_id');
-			$table->foreign('ticket_id')->references('id')->on('tickets');
+			$table->foreign('ticket_id')->references('id')->on('tickets')->onDelete('cascade');
 
 			$table->nullableTimestamps();
 		});

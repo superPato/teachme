@@ -14,6 +14,8 @@ class CreateTicketsTable extends Migration {
 	{
 		Schema::create('tickets', function(Blueprint $table)
 		{
+            $table->engine = 'InnoDB';
+
 			$table->increments('id');
 
 			$table->string('title', 200);

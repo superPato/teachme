@@ -14,7 +14,32 @@ class DatabaseSeeder extends Seeder {
 	{
 		Model::unguard();
 
-		$this->call('UserTableSeeder');
+        $this->truncateTables(array(
+            'users',
+            'password_resets',
+            'tickets',
+            'ticket_votes',
+            'ticket_comments',
+        ));
+
+        $this->call('UserTableSeeder');
 	}
+
+    public function truncateTables(array $tables)
+    {
+        $this->checkForeignKeys(false);
+
+        foreach ($tables as $table) {
+            DB::table($table)->truncate();
+        }
+
+        $this->checkForeignKeys(true);
+    }
+
+    public function checkForeignKeys($ckeck)
+    {
+        $ckeck = $ckeck ? '1' : '0';
+        DB::statement('SET FOREIGN_KEY_CHECKS = ' . $ckeck);
+    }
 
 }
