@@ -7,7 +7,13 @@ use Faker\Factory as Faker;
 
 abstract class BaseSeeder extends Seeder
 {
-    protected static $pool;
+    protected $total = 50;
+    protected static $pool = array();
+
+    public function run()
+    {
+        $this->createMultiple($this->total);
+    }
 
     protected function createMultiple($total, array $customValues = array())
     {
