@@ -1,11 +1,14 @@
 <?php
 
 use Faker\Generator;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 
 abstract class BaseSeeder extends Seeder
 {
+    protected static $pool;
+
     protected function createMultiple($total, array $customValues = array())
     {
         for ($i = 1; $i <= $total; $i++) {
@@ -20,6 +23,44 @@ abstract class BaseSeeder extends Seeder
     {
         $values = $this->getDummyData(Faker::create(), $customValues);
         $values = array_merge($values, $customValues);
-        $this->getModel()->create($values);
+        return $this->addToPool($this->getModel()->create($values));
+    }
+
+    protected function createFrom($seeder, array $customValues = array())
+    {
+        $seeder = new $seeder;
+        return $seeder->create($customValues);
+    }
+
+    protected function getRandom($model)
+    {
+        if (! $this->collectionExist($model))
+        {
+            throw new Exception("The $model collection does not exist");
+        }
+
+        return static::$pool[$model]->random();
+    }
+
+    private function addToPool($entity)
+    {
+        $reflection = new ReflectionClass($entity);
+        $class = $reflection->getShortName();
+
+        if ( !$this->collectionExist($class))
+        {
+            static::$pool[$class] = new Collection();
+        }
+
+        return static::$pool[$class]->add($entity);
+    }
+
+    /**
+     * @param $class
+     * @return bool
+     */
+    private function collectionExist($class)
+    {
+        return isset(static::$pool[$class]);
     }
 }
