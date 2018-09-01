@@ -4,7 +4,6 @@ use TeachMe\Entities\Ticket;
 
 class TicketTableSeeder extends BaseSeeder
 {
-
     public function getModel()
     {
         return new Ticket();

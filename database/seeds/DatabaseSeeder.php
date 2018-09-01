@@ -3,16 +3,17 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
-class DatabaseSeeder extends Seeder {
+class DatabaseSeeder extends Seeder
+{
 
-	/**
-	 * Run the database seeds.
-	 *
-	 * @return void
-	 */
-	public function run()
-	{
-		Model::unguard();
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        Model::unguard();
 
         $this->truncateTables(array(
             'users',
@@ -26,7 +27,7 @@ class DatabaseSeeder extends Seeder {
         $this->call('TicketTableSeeder');
         $this->call('TicketVoteTableSeeder');
         $this->call('TicketCommentTableSeeder');
-	}
+    }
 
     public function truncateTables(array $tables)
     {
@@ -44,5 +45,4 @@ class DatabaseSeeder extends Seeder {
         $ckeck = $ckeck ? '1' : '0';
         DB::statement('SET FOREIGN_KEY_CHECKS = ' . $ckeck);
     }
-
 }
