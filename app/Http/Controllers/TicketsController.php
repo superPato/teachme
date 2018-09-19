@@ -1,6 +1,7 @@
 <?php namespace TeachMe\Http\Controllers;
 
 use TeachMe\Entities\Ticket;
+use TeachMe\Entities\TicketComment;
 use TeachMe\Http\Requests;
 use TeachMe\Http\Controllers\Controller;
 
