@@ -48,7 +48,12 @@ class TicketsController extends Controller {
 
     public function create()
     {
-        return '[formulario de solicitud]';
+        return view('tickets.create');
+	}
+
+    public function store(Request $request)
+    {
+        dd($request->all());
 	}
 
 }
