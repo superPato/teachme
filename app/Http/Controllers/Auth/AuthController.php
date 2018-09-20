@@ -35,4 +35,14 @@ class AuthController extends Controller
 
         $this->middleware('guest', ['except' => 'getLogout']);
     }
+
+    /**
+     * Get the post register / login redirect path.
+     *
+     * @return string
+     */
+    public function redirectPath()
+    {
+        return '/';
+    }
 }
