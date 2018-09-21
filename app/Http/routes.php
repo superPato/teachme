@@ -68,6 +68,10 @@ Route::group(['middleware' => 'auth'], function () {
     // Comentar
     // comentar/5
     // comentar/10
+    Route::post('comentar/{id}', [
+        'as' => 'comments.store',
+        'uses' => 'CommentsController@store'
+    ]);
 
 
 });
