@@ -3,9 +3,6 @@
 use Illuminate\Auth\Guard;
 use Illuminate\Support\Facades\Redirect;
 use TeachMe\Entities\Ticket;
-use TeachMe\Entities\TicketComment;
-use TeachMe\Http\Requests;
-use TeachMe\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
@@ -13,7 +10,7 @@ class TicketsController extends Controller {
 
     public function latest()
     {
-        $tickets = Ticket::orderBy('created_at', 'DESC')->paginate();
+        $tickets = Ticket::orderBy('created_at', 'DESC')->with('author')->paginate();
 
         return view('tickets/list', compact('tickets'));
 	}

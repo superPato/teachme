@@ -3,8 +3,6 @@
 use Illuminate\Auth\Guard;
 use TeachMe\Entities\Ticket;
 use TeachMe\Entities\TicketComment;
-use TeachMe\Http\Requests;
-use TeachMe\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
