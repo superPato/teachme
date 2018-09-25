@@ -1,25 +1,42 @@
-<?php namespace TeachMe\Http\Controllers;
+<?php
+namespace TeachMe\Http\Controllers;
 
-use TeachMe\Entities\Ticket;
-use TeachMe\Http\Requests;
-use TeachMe\Http\Controllers\Controller;
+use TeachMe\Repositories\TicketRepository;
+use TeachMe\Repositories\VoteRepository;
 
-use Illuminate\Http\Request;
 
 class VotesController extends Controller {
 
+    /**
+     * @var TicketRepository
+     */
+    private $ticketRepository;
+    /**
+     * @var VoteRepository
+     */
+    private $voteRepository;
+
+    public function __construct(
+        TicketRepository $ticketRepository,
+        VoteRepository $voteRepository
+    )
+    {
+        $this->ticketRepository = $ticketRepository;
+        $this->voteRepository = $voteRepository;
+    }
+
     public function submit($id)
     {
-        $ticket = Ticket::findOrFail($id);
-        currentUser()->vote($ticket);
+        $ticket = $this->ticketRepository->findOrFail($id);
+        $this->voteRepository->vote(currentUser(), $ticket);
 
         return redirect()->back();
 	}
 
     public function destroy($id)
     {
-        $ticket = Ticket::findOrFail($id);
-        currentUser()->unvote($ticket);
+        $ticket = $this->ticketRepository->findOrFail($id);
+        $this->voteRepository->unvote(currentUser(), $ticket);
 
         return redirect()->back();
 	}

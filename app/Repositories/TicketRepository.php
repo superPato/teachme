@@ -41,4 +41,12 @@ class TicketRepository extends BaseRepository
             ->orderBy('created_at', 'DESC')
             ->paginate(20);
     }
+
+    public function openNew($user, $title)
+    {
+        return $user->tickets()->create([
+            'title' => $title,
+            'status' => 'open'
+        ]);
+    }
 }
