@@ -62,7 +62,7 @@ class TicketsController extends Controller {
             'title' => 'required|max:120'
         ]);
 
-        $this->ticketRepository->openNew(
+        $ticket = $this->ticketRepository->openNew(
             currentUser(),
             $request->get('title')
         );
