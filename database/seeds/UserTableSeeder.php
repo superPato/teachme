@@ -1,10 +1,10 @@
 <?php
 
 use Faker\Generator;
+use Styde\Seeder\Seeder;
 use TeachMe\Entities\User;
-use Faker\Factory as Faker;
 
-class UserTableSeeder extends BaseSeeder
+class UserTableSeeder extends Seeder
 {
     public function run()
     {
