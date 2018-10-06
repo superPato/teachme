@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ticket extends Model
 {
-    protected $fillable = ['title', 'status'];
+    protected $fillable = ['title', 'status', 'link'];
 
     public function author()
     {

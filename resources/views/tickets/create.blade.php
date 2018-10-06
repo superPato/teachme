@@ -19,7 +19,11 @@
             				'placeholder' => 'Describe brevemente de qué quieres que se trate el tutorial'
             			]) 
             		!!}
-                    {!! Form::text('link') !!}
+                    {!! Form::label('link', 'Enlace') !!}
+                    {!! Form::text('link', null, [
+                        'class' => 'form-control',
+                        'placeholder' => 'Comparte un tutorial o recurso colocando un una URL (opcional)'
+                    ]) !!}
             	</div>
 
                 <p>
