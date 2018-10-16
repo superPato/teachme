@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Redirect;
 
 use Illuminate\Http\Request;
+use TeachMe\Entities\TicketComment;
 use TeachMe\Repositories\TicketRepository;
 
 class TicketsController extends Controller {
@@ -70,6 +71,15 @@ class TicketsController extends Controller {
         );
 
         return Redirect::route('tickets.details', $ticket->id);
+	}
+
+    public function select($ticketId, $commentId)
+    {
+        $ticket = $this->ticketRepository->findOrFail($ticketId);
+
+        $ticket->assignResource($commentId);
+
+        return Redirect::back();
 	}
 
 }
