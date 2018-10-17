@@ -45,4 +45,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         return $this->voted()->where('ticket_id', $ticket->id)->count();
     }
+
+    public function isAuthor(Ticket $ticket)
+    {
+        return $this->id == $ticket->user_id;
+    }
+
+    public function isAdmin()
+    {
+        return $this->role == 'admin';
+    }
 }

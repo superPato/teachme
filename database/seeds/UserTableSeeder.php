@@ -18,7 +18,8 @@ class UserTableSeeder extends Seeder
         $this->create([
             'name' => 'Cesar Acual',
             'email' => 'chechaacual@gmail.com',
-            'password' => bcrypt('admin')
+            'password' => bcrypt('admin'),
+            'role' => 'admin'
         ]);
     }
 
@@ -32,7 +33,8 @@ class UserTableSeeder extends Seeder
         return [
             'name' => $faker->name,
             'email' => $faker->email,
-            'password' => bcrypt('secret')
+            'password' => bcrypt('secret'),
+            'role' => 'user'
         ];
     }
 }
