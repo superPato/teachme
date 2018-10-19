@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Gate;
 use TeachMe\Policies\TicketPolicy;
 
 class TicketPolicyTest extends TestCase
@@ -43,6 +44,7 @@ class TicketPolicyTest extends TestCase
 
         $policy = new TicketPolicy();
 
-        $this->assertTrue($policy->selectResource($admin, $ticket));
+        $this->assertTrue($admin->can('selectResource', $ticket));
+        //$this->assertTrue(Gate::forUser($admin)->allows('selectResource', $ticket));
     }
 }
